@@ -15,7 +15,7 @@ const wallet = new Wallet(WALLET_SECRET, "https://node-beta-1.fuel.network/graph
 // address using the given wallet.
 const contract = CounterContractAbi__factory.connect(CONTRACT_ID, wallet);
 
-function App() {
+export default function App() {
   const [counter, setCounter] = useState(0);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -40,17 +40,20 @@ function App() {
       setLoading(false);
     }
   }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Counter: {counter}</p>
-        <button
-          disabled={loading}
-          onClick={increment}>
-          {loading ? "Incrementing..." : "Increment"}
-        </button>
-      </header>
+      <h1>
+          First Fuel App ⛽<br></br>
+      </h1>
+      <div className="App-header">
+        <h1>
+          Counter: {counter}
+        </h1>
+          <button className="button" disabled={loading} onClick={increment}>
+            {loading ? "Loading..." : "Increment➕➕"}
+          </button>
+      </div>
     </div>
   );
 }
-export default App;
