@@ -17,6 +17,7 @@ interface CounterContractAbiInterface extends Interface {
   functions: {
     count: FunctionFragment;
     increment: FunctionFragment;
+    decrement: FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "count", values?: undefined): Uint8Array;
@@ -24,10 +25,18 @@ interface CounterContractAbiInterface extends Interface {
     functionFragment: "increment",
     values?: undefined
   ): Uint8Array;
+  encodeFunctionData(
+    functionFragment: "decrement",
+    values?: undefined
+  ): Uint8Array;
 
   decodeFunctionData(functionFragment: "count", data: BytesLike): DecodedValue;
   decodeFunctionData(
     functionFragment: "increment",
+    data: BytesLike
+  ): DecodedValue;
+  decodeFunctionData(
+    functionFragment: "decrement",
     data: BytesLike
   ): DecodedValue;
 }
@@ -38,5 +47,7 @@ export class CounterContractAbi extends Contract {
     count: InvokeFunction<[], BN>;
 
     increment: InvokeFunction<[], void>;
+
+    decrement: InvokeFunction<[], void>;
   };
 }

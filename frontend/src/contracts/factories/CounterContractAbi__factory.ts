@@ -32,6 +32,18 @@ const _abi = [
       },
     ],
   },
+  {
+    type: "function",
+    name: "decrement",
+    inputs: [],
+    outputs: [
+      {
+        type: "()",
+        name: "",
+        components: [],
+      },
+    ],
+  },
 ];
 
 export class CounterContractAbi__factory {

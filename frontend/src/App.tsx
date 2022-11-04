@@ -5,9 +5,9 @@ import "./App.css";
 // You can also do command + space and the compiler will suggest the correct name.
 import { CounterContractAbi__factory } from "./contracts";
 // The address of the contract deployed the Fuel testnet
-const CONTRACT_ID = "0xe5dc89f7b8c62e40927a6b17f144583bf6571d2468ab1e2554d2731f4c9fc428";
+const CONTRACT_ID = "0xedc27cce6b5f0cb43766e7623c28f9511d9a526e0501603859bed30943b075b6";
 //the private key from createWallet.js
-const WALLET_SECRET = "0x8e90c4cd8a924d9760ae60e5db63197be9561057cdfd818baad9c1159a66cb39"
+const WALLET_SECRET = "0xbc3723e8c05d5e449f7cdc768b3d6e0254659b6236f6dc3f5604f6bf04bf7a13"
 // Create a Wallet from given secretKey in this case
 // The one we configured at the chainConfig.json
 const wallet = new Wallet(WALLET_SECRET, "https://node-beta-1.fuel.network/graphql");
@@ -41,6 +41,20 @@ export default function App() {
     }
   }
 
+  async function decrement() {
+    // a loading state
+    setLoading(true);
+    // Creates a transactions to call the decrement function
+    // because it creates a TX and updates the contract state this requires the wallet to have enough coins to cover the costs and also to sign the Transaction
+    try {
+      await contract.functions.decrement().txParams({gasPrice:1}).call();
+      const { value } = await contract.functions.count().get();
+      setCounter(Number(value));
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="App">
       <h1>
@@ -52,6 +66,9 @@ export default function App() {
         </h1>
           <button className="button" disabled={loading} onClick={increment}>
             {loading ? "Loading..." : "Increment➕➕"}
+          </button>
+          <button className="button" disabled={loading} onClick={decrement}>
+            {loading ? "Loading..." : "Decrement➖➖"}
           </button>
       </div>
     </div>

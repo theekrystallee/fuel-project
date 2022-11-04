@@ -8,6 +8,9 @@ abi Counter {
     #[storage(read, write)]
     fn increment();
 
+    #[storage(read, write)]
+    fn decrement();
+
     #[storage(read)]
     fn count() -> u64;
 }
@@ -21,5 +24,10 @@ impl Counter for Contract {
     #[storage(read, write)]
     fn increment() {
         storage.counter = storage.counter + 1;
+    }
+
+    #[storage(read, write)]
+    fn decrement() {
+        storage.counter = storage.counter - 1;
     }
 }
