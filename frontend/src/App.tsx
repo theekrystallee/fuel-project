@@ -58,7 +58,7 @@ export default function App() {
   return (
     <div className="App">
       <h1>
-          First Fuel App ⛽<br></br>
+          First Fuel App ⛽
       </h1>
       <div className="App-header">
         <h1>
